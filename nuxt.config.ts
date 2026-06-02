@@ -71,28 +71,20 @@ export default defineNuxtConfig({
   },
   compatibilityDate: 'latest',
   nitro: {
-    preset: !import.meta.env.CI ? 'cloudflare-module' : undefined,
-    experimental: {
-      openAPI: true,
-    },
-    timing: true,
-    openAPI: {
-      production: 'runtime',
-      meta: {
-        title: 'Sink API',
-        description: 'A Simple / Speedy / Secure Link Shortener with Analytics, 100% run on Cloudflare.',
-      },
-      route: '/_docs/openapi.json',
-      ui: {
-        scalar: {
-          route: '/_docs/scalar',
-        },
-        swagger: {
-          route: '/_docs/swagger',
-        },
-      },
-    },
+  // 明确指定 Cloudflare Pages 预设
+  preset: 'cloudflare-pages',
+  
+  // 如果你需要在本地开发时使用 module 模式，可以使用 devPreset
+  devPreset: 'cloudflare-module',
+
+  experimental: {
+    openAPI: true,
   },
+  timing: true,
+  openAPI: {
+    // ... 保持你原有的 openAPI 配置不变
+  },
+},
   vite: {
     plugins: [
       tailwindcss(),
